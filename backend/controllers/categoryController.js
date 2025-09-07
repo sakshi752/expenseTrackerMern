@@ -14,7 +14,7 @@ export const addUpdateCategory = async (req, res) => {
         }
 
         if (id) {
-            const updatedTodo = await Category.findByIdAndUpdate(
+            const updatedCategory = await Category.findByIdAndUpdate(
                 id, {
                 name,
                 categoryType,
@@ -22,7 +22,7 @@ export const addUpdateCategory = async (req, res) => {
             }
             );
 
-            if (!updatedTodo) {
+            if (!updatedCategory) {
                 return res.status(400).json({ message: "Category not found" });
             }
 
@@ -68,10 +68,10 @@ export const getCategories = async (req, res) => {
 
         const categories = await Category.find(filter).skip((page - 1) * limit).limit(limit).sort({ createdAt: -1 });
 
-        const total = await Category.countDocuments(filter);
+        const total = await Category.countDocuments();
 
         res.status(200).json({
-            totalData: total,
+            totalCount: total,
             data: categories
         })
 
