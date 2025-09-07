@@ -14,19 +14,6 @@ export const addUpdateCategory = async (req, res) => {
         }
 
         if (id) {
-            const newCategory = new Category({
-                name,
-                categoryType,
-                isDelete,
-                user: userId
-            });
-
-            await newCategory.save();
-
-            res.status(200).json({
-                message: "Category added successfully!"
-            })
-        } else {
             const updatedTodo = await Category.findByIdAndUpdate(
                 id, {
                 name,
@@ -40,9 +27,21 @@ export const addUpdateCategory = async (req, res) => {
             }
 
             res.status(200).json({ message: "Category updated successfully" });
+        } else {
+            const newCategory = new Category({
+                name,
+                categoryType,
+                isDelete,
+                user: userId
+            });
+
+            await newCategory.save();
+
+            res.status(200).json({
+                message: "Category added successfully!"
+            })
+
         }
-
-
     } catch (error) {
         res.status(500).json({
             message: error.message
@@ -50,18 +49,6 @@ export const addUpdateCategory = async (req, res) => {
     }
 }
 
-export const deleteCategory = async (req, res) => {
-    try {
-
-        const { id } = req.params;
-
-
-    } catch (error) {
-        res.status(500).json({
-            message: error.message
-        })
-    }
-}
 
 export const getCategories = async (req, res) => {
     try {
@@ -95,4 +82,18 @@ export const getCategories = async (req, res) => {
         })
     }
 
+}
+
+
+export const deleteCategory = async (req, res) => {
+    try {
+
+        const { id } = req.params;
+
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        })
+    }
 }
