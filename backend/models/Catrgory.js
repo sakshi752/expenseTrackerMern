@@ -9,6 +9,10 @@ const categorySchema = new mongoose.Schema({
         enum: [0, 1], // 0 = income, 1 = expense
         required: true,
     },
+    isDelete:{type:Number,
+        enum:[0,1],
+        required:true
+    },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
 }, { timestamps: true })
 
