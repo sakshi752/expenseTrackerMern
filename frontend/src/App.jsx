@@ -17,7 +17,7 @@ function App() {
     <>
       <Router>
         <Routes path="/" element={<Layout />}>
-          <Route index path='/home' element={<HomePage />} />
+          <Route index  element={<HomePage />} />
           {token ? <>
             <Route path="/transaction" element={<TransactionPage />}
             />
