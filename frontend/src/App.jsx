@@ -4,19 +4,29 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Layout from "./Components/Layout";
 import Dashboard from "./Pages/DashboardPage/Dashboard";
 import LoginPage from "./Pages/LoginPage/LoginPage";
+import HomePage from "./Pages/HomePage/HomePage";
+import CategoryPage from "./Pages/CategoryPage/CategoryPage";
 import TransactionPage from "./Pages/TransactionPage/TransactionPage";
 import { ToastContainer } from "react-toastify";
 
 function App() {
   const { user, token } = useSelector((state) => state.auth);
+
+  const unauthenticatedRoutes = [
+    // {id:1,page: }
+  ]
+
   return (
     <>
       <Router>
         <Routes path="/" element={<Layout />}>
-          <Route index element={token ? <Dashboard /> : <LoginPage />} />
-
-          {token && <>
-            <Route path="/transactions" element={<TransactionPage />} />
+          <Route index path='/home' element={<HomePage />} />
+          {token ? <>
+            <Route path="/transaction" element={<TransactionPage />}
+            />
+            <Route path='/category' element={<CategoryPage />} />
+          </>:<>
+          <Route path='/login' element={<LoginPage/>}/>
           </>}
         </Routes>
       </Router>
