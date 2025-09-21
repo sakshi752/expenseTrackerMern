@@ -12,9 +12,6 @@ import { ToastContainer } from "react-toastify";
 function App() {
   const { user, token } = useSelector((state) => state.auth);
 
-  const unauthenticatedRoutes = [
-    // {id:1,page: }
-  ]
 
   return (
     <>
